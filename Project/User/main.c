@@ -5,9 +5,9 @@ TCB_t Task1TCB;
 TCB_t Task2TCB;
 int main(void)
 {	
-       
+       // test github
 	for(;;)
 	{
-		/* ɶ�²��� */
+		/* É¶ÊÂ²»¸É */
 	}
 }
