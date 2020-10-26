@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\freertos\Source\include</IncludePath>
+              <IncludePath>.\freertos\Source\include;.\freertos\Source\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

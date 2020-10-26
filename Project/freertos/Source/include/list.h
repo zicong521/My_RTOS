@@ -23,6 +23,7 @@ struct xLIST_ITEM
 	void * pvOwner;					   /* 指向拥有该节点的内核对象(该节点的拥有者)，通常是TCB */
 	void *  pvContainer;		       /* 指向该节点所在的链表  一般是根节点*/
 };
+
 typedef struct xLIST_ITEM ListItem_t;  /* 节点数据类型重定义 */
 
 

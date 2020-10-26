@@ -3,8 +3,8 @@
 #include "list.h"
 #include "FreeRTOSConfig.h"
 #include "portable.h"
-
-// 人物控制块结构体
+#include "projdefs.h"
+// 任务控制块结构体
 typedef struct tskTaskControlBlock
 {
 	volatile StackType_t    *pxTopOfStack;    /* 栈顶 */
