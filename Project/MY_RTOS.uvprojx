@@ -390,18 +390,6 @@
         </Group>
         <Group>
           <GroupName>freertos/Source</GroupName>
-          <Files>
-            <File>
-              <FileName>list.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\freertos\Source\list.c</FilePath>
-            </File>
-            <File>
-              <FileName>task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\freertos\Source\task.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Doc</GroupName>

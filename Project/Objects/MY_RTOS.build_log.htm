@@ -22,34 +22,16 @@ Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
 D:\stm32\FreeRTOS\My_RTOS\Project\MY_RTOS.uvprojx
-Project File Date:  10/26/2020
+Project File Date:  10/27/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling task.c...
-.\freertos\Source\include\list.h(20): error:  #20: identifier "TickType_t" is undefined
-  	TickType_t xItemValue;             /* 辅助值，用于帮助节点做顺序排列 */			
-.\freertos\Source\include\list.h(35): error:  #20: identifier "TickType_t" is undefined
-  	TickType_t xItemValue;                      /* 辅助值，用于帮助节点做升序排列 */
-.\freertos\Source\include\list.h(45): error:  #20: identifier "UBaseType_t" is undefined
-  	UBaseType_t uxNumberOfItems;    /* 链表节点计数器 */
-.\freertos\Source\include\list.h(112): error:  #20: identifier "UBaseType_t" is undefined
-  UBaseType_t uxListRemove( ListItem_t * const pxItemToRemove );
-.\freertos\Source\include\task.h(13): warning:  #1-D: last line of file ends without a newline
-  #endif /* INC_TASK_H */ 
-freertos\Source\task.c: 1 warning, 4 errors
-compiling main.c...
-.\freertos\Source\include\FreeRTOS.h(12): error:  #20: identifier "ListItem_t" is undefined
-  	ListItem_t			    xStateListItem;   /* 任务节点 */
-.\freertos\Source\include\task.h(13): warning:  #1-D: last line of file ends without a newline
-  #endif /* INC_TASK_H */ 
-User\main.c: 1 warning, 1 error
 compiling list.c...
-.\freertos\Source\include\FreeRTOS.h(12): error:  #20: identifier "ListItem_t" is undefined
-  	ListItem_t			    xStateListItem;   /* 任务节点 */
+.\freertos\Source\include\FreeRTOS.h(20): error:  #20: identifier "xLIST_ITEM" is undefined
+  	xLIST_ITEM			    xStateListItem;
 freertos\Source\list.c: 0 warnings, 1 error
-".\Objects\MY_RTOS.axf" - 6 Error(s), 2 Warning(s).
+".\Objects\MY_RTOS.axf" - 1 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 

@@ -4,15 +4,23 @@
 #include "FreeRTOSConfig.h"
 #include "portable.h"
 #include "projdefs.h"
-// ������ƿ�ṹ��
+struct xLIST_ITEM
+{
+	TickType_t xItemValue;             /* 辅助值，用于帮助节点做顺序排列 */			
+	struct xLIST_ITEM *  pxNext;       /* 指向链表下一个节点 */		
+	struct xLIST_ITEM *  pxPrevious;   /* 指向链表前一个节点 */	
+	void * pvOwner;					   /* 指向拥有该节点的内核对象，通常是TCB */
+	void *  pvContainer;		       /* 指向该节点所在的链表 */
+};
+typedef struct xLIST_ITEM ListItem_t;  /* 节点数据类型重定义 */
+
 typedef struct tskTaskControlBlock
 {
-	volatile StackType_t    *pxTopOfStack;    /* ջ�� */
-
-	ListItem_t			    xStateListItem;   /* ����ڵ� */
-    
-    StackType_t             *pxStack;         /* ����ջ��ʼ��ַ */
-	                                          /* �������ƣ��ַ�����ʽ */
+	volatile StackType_t    *pxTopOfStack;     
+	xLIST_ITEM			    xStateListItem;
+    //ListItem_t xStateListItem;
+    StackType_t             *pxStack;         
+	                                         
 	char                    pcTaskName[ configMAX_TASK_NAME_LEN ];  
 } tskTCB;
 typedef tskTCB TCB_t;
