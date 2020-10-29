@@ -7,3 +7,5 @@
 .\objects\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\main.o: .\freertos\Source\include\task.h
 .\objects\main.o: .\freertos\Source\include\list.h
+.\objects\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
