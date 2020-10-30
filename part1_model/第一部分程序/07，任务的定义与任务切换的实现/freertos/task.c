@@ -4,14 +4,14 @@
 
 /*
 *************************************************************************
-*                               ÈÎÎñ¿ØÖÆ¿é
+*                               ä»»åŠ¡æ§åˆ¶å—
 *************************************************************************
 */
 
-/* µ±Ç°ÕıÔÚÔËĞĞµÄÈÎÎñµÄÈÎÎñ¿ØÖÆ¿éÖ¸Õë£¬Ä¬ÈÏ³õÊ¼»¯ÎªNULL */
+/* å½“å‰æ­£åœ¨è¿è¡Œçš„ä»»åŠ¡çš„ä»»åŠ¡æ§åˆ¶å—æŒ‡é’ˆï¼Œé»˜è®¤åˆå§‹åŒ–ä¸ºNULL */
 TCB_t * volatile pxCurrentTCB = NULL;
 
-/* ÈÎÎñ¾ÍĞ÷ÁĞ±í */
+/* ä»»åŠ¡å°±ç»ªåˆ—è¡¨ */
 List_t pxReadyTasksLists[ configMAX_PRIORITIES ];
 
 
@@ -20,21 +20,21 @@ static volatile UBaseType_t uxCurrentNumberOfTasks 	= ( UBaseType_t ) 0U;
 
 /*
 *************************************************************************
-*                               º¯ÊıÉùÃ÷
+*                               å‡½æ•°å£°æ˜
 *************************************************************************
 */
 
-static void prvInitialiseNewTask( 	TaskFunction_t pxTaskCode,              /* ÈÎÎñÈë¿Ú */
-									const char * const pcName,              /* ÈÎÎñÃû³Æ£¬×Ö·û´®ĞÎÊ½ */
-									const uint32_t ulStackDepth,            /* ÈÎÎñÕ»´óĞ¡£¬µ¥Î»Îª×Ö */
-									void * const pvParameters,              /* ÈÎÎñĞÎ²Î */
-									TaskHandle_t * const pxCreatedTask,     /* ÈÎÎñ¾ä±ú */
+static void prvInitialiseNewTask( 	TaskFunction_t pxTaskCode,              /* ä»»åŠ¡å…¥å£ */
+									const char * const pcName,              /* ä»»åŠ¡åç§°ï¼Œå­—ç¬¦ä¸²å½¢å¼ */
+									const uint32_t ulStackDepth,            /* ä»»åŠ¡æ ˆå¤§å°ï¼Œå•ä½ä¸ºå­— */
+									void * const pvParameters,              /* ä»»åŠ¡å½¢å‚ */
+									TaskHandle_t * const pxCreatedTask,     /* ä»»åŠ¡å¥æŸ„ */
 									TCB_t *pxNewTCB );
 
 
 /*
 *************************************************************************
-*                               ºê¶¨Òå
+*                               å®å®šä¹‰
 *************************************************************************
 */
                                     
@@ -43,17 +43,17 @@ static void prvInitialiseNewTask( 	TaskFunction_t pxTaskCode,              /* ÈÎ
 
 /*
 *************************************************************************
-*                               ¾²Ì¬ÈÎÎñ´´½¨º¯Êı
+*                               é™æ€ä»»åŠ¡åˆ›å»ºå‡½æ•°
 *************************************************************************
 */
 #if( configSUPPORT_STATIC_ALLOCATION == 1 )
 
-TaskHandle_t xTaskCreateStatic(	TaskFunction_t pxTaskCode,           /* ÈÎÎñÈë¿Ú */
-					            const char * const pcName,           /* ÈÎÎñÃû³Æ£¬×Ö·û´®ĞÎÊ½ */
-					            const uint32_t ulStackDepth,         /* ÈÎÎñÕ»´óĞ¡£¬µ¥Î»Îª×Ö */
-					            void * const pvParameters,           /* ÈÎÎñĞÎ²Î */
-					            StackType_t * const puxStackBuffer,  /* ÈÎÎñÕ»ÆğÊ¼µØÖ· */
-					            TCB_t * const pxTaskBuffer )         /* ÈÎÎñ¿ØÖÆ¿éÖ¸Õë */
+TaskHandle_t xTaskCreateStatic(	TaskFunction_t pxTaskCode,           /* ä»»åŠ¡å…¥å£ */
+					            const char * const pcName,           /* ä»»åŠ¡åç§°ï¼Œå­—ç¬¦ä¸²å½¢å¼ */
+					            const uint32_t ulStackDepth,         /* ä»»åŠ¡æ ˆå¤§å°ï¼Œå•ä½ä¸ºå­— */
+					            void * const pvParameters,           /* ä»»åŠ¡å½¢å‚ */
+					            StackType_t * const puxStackBuffer,  /* ä»»åŠ¡æ ˆèµ·å§‹åœ°å€ */
+					            TCB_t * const pxTaskBuffer )         /* ä»»åŠ¡æ§åˆ¶å—æŒ‡é’ˆ */
 {
 	TCB_t *pxNewTCB;
 	TaskHandle_t xReturn;
@@ -63,13 +63,13 @@ TaskHandle_t xTaskCreateStatic(	TaskFunction_t pxTaskCode,           /* ÈÎÎñÈë¿Ú
 		pxNewTCB = ( TCB_t * ) pxTaskBuffer; 
 		pxNewTCB->pxStack = ( StackType_t * ) puxStackBuffer;
 
-		/* ´´½¨ĞÂµÄÈÎÎñ */
-		prvInitialiseNewTask( pxTaskCode,        /* ÈÎÎñÈë¿Ú */
-                              pcName,            /* ÈÎÎñÃû³Æ£¬×Ö·û´®ĞÎÊ½ */
-                              ulStackDepth,      /* ÈÎÎñÕ»´óĞ¡£¬µ¥Î»Îª×Ö */ 
-                              pvParameters,      /* ÈÎÎñĞÎ²Î */
-                              &xReturn,          /* ÈÎÎñ¾ä±ú */ 
-                              pxNewTCB);         /* ÈÎÎñÕ»ÆğÊ¼µØÖ· */      
+		/* åˆ›å»ºæ–°çš„ä»»åŠ¡ */
+		prvInitialiseNewTask( pxTaskCode,        /* ä»»åŠ¡å…¥å£ */
+                              pcName,            /* ä»»åŠ¡åç§°ï¼Œå­—ç¬¦ä¸²å½¢å¼ */
+                              ulStackDepth,      /* ä»»åŠ¡æ ˆå¤§å°ï¼Œå•ä½ä¸ºå­— */ 
+                              pvParameters,      /* ä»»åŠ¡å½¢å‚ */
+                              &xReturn,          /* ä»»åŠ¡å¥æŸ„ */ 
+                              pxNewTCB);         /* ä»»åŠ¡æ ˆèµ·å§‹åœ°å€ */      
 
 	}
 	else
@@ -77,31 +77,31 @@ TaskHandle_t xTaskCreateStatic(	TaskFunction_t pxTaskCode,           /* ÈÎÎñÈë¿Ú
 		xReturn = NULL;
 	}
 
-	/* ·µ»ØÈÎÎñ¾ä±ú£¬Èç¹ûÈÎÎñ´´½¨³É¹¦£¬´ËÊ±xReturnÓ¦¸ÃÖ¸ÏòÈÎÎñ¿ØÖÆ¿é */
+	/* è¿”å›ä»»åŠ¡å¥æŸ„ï¼Œå¦‚æœä»»åŠ¡åˆ›å»ºæˆåŠŸï¼Œæ­¤æ—¶xReturnåº”è¯¥æŒ‡å‘ä»»åŠ¡æ§åˆ¶å— */
     return xReturn;
 }
 
 #endif /* configSUPPORT_STATIC_ALLOCATION */
 
 
-static void prvInitialiseNewTask( 	TaskFunction_t pxTaskCode,              /* ÈÎÎñÈë¿Ú */
-									const char * const pcName,              /* ÈÎÎñÃû³Æ£¬×Ö·û´®ĞÎÊ½ */
-									const uint32_t ulStackDepth,            /* ÈÎÎñÕ»´óĞ¡£¬µ¥Î»Îª×Ö */
-									void * const pvParameters,              /* ÈÎÎñĞÎ²Î */
-									TaskHandle_t * const pxCreatedTask,     /* ÈÎÎñ¾ä±ú */
-									TCB_t *pxNewTCB )                       /* ÈÎÎñ¿ØÖÆ¿éÖ¸Õë */
+static void prvInitialiseNewTask( 	TaskFunction_t pxTaskCode,              /* ä»»åŠ¡å…¥å£ */
+									const char * const pcName,              /* ä»»åŠ¡åç§°ï¼Œå­—ç¬¦ä¸²å½¢å¼ */
+									const uint32_t ulStackDepth,            /* ä»»åŠ¡æ ˆå¤§å°ï¼Œå•ä½ä¸ºå­— */
+									void * const pvParameters,              /* ä»»åŠ¡å½¢å‚ */
+									TaskHandle_t * const pxCreatedTask,     /* ä»»åŠ¡å¥æŸ„ */
+									TCB_t *pxNewTCB )                       /* ä»»åŠ¡æ§åˆ¶å—æŒ‡é’ˆ */
 
 {
 	StackType_t *pxTopOfStack;
 	UBaseType_t x;	
 	
-	/* »ñÈ¡Õ»¶¥µØÖ· */
+	/* è·å–æ ˆé¡¶åœ°å€ */
 	pxTopOfStack = pxNewTCB->pxStack + ( ulStackDepth - ( uint32_t ) 1 );
 	//pxTopOfStack = ( StackType_t * ) ( ( ( portPOINTER_SIZE_TYPE ) pxTopOfStack ) & ( ~( ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) ) );
-	/* ÏòÏÂ×ö8×Ö½Ú¶ÔÆë */
+	/* å‘ä¸‹åš8å­—èŠ‚å¯¹é½ */
 	pxTopOfStack = ( StackType_t * ) ( ( ( uint32_t ) pxTopOfStack ) & ( ~( ( uint32_t ) 0x0007 ) ) );	
 
-	/* ½«ÈÎÎñµÄÃû×Ö´æ´¢ÔÚTCBÖĞ */
+	/* å°†ä»»åŠ¡çš„åå­—å­˜å‚¨åœ¨TCBä¸­ */
 	for( x = ( UBaseType_t ) 0; x < ( UBaseType_t ) configMAX_TASK_NAME_LEN; x++ )
 	{
 		pxNewTCB->pcTaskName[ x ] = pcName[ x ];
@@ -111,27 +111,27 @@ static void prvInitialiseNewTask( 	TaskFunction_t pxTaskCode,              /* ÈÎ
 			break;
 		}
 	}
-	/* ÈÎÎñÃû×ÖµÄ³¤¶È²»ÄÜ³¬¹ıconfigMAX_TASK_NAME_LEN */
+	/* ä»»åŠ¡åå­—çš„é•¿åº¦ä¸èƒ½è¶…è¿‡configMAX_TASK_NAME_LEN */
 	pxNewTCB->pcTaskName[ configMAX_TASK_NAME_LEN - 1 ] = '\0';
 
-    /* ³õÊ¼»¯TCBÖĞµÄxStateListItem½Úµã */
+    /* åˆå§‹åŒ–TCBä¸­çš„xStateListItemèŠ‚ç‚¹ */
     vListInitialiseItem( &( pxNewTCB->xStateListItem ) );
-    /* ÉèÖÃxStateListItem½ÚµãµÄÓµÓĞÕß */
+    /* è®¾ç½®xStateListItemèŠ‚ç‚¹çš„æ‹¥æœ‰è€… */
 	listSET_LIST_ITEM_OWNER( &( pxNewTCB->xStateListItem ), pxNewTCB );
     
     
-    /* ³õÊ¼»¯ÈÎÎñÕ» */
+    /* åˆå§‹åŒ–ä»»åŠ¡æ ˆ */
 	pxNewTCB->pxTopOfStack = pxPortInitialiseStack( pxTopOfStack, pxTaskCode, pvParameters );   
 
 
-	/* ÈÃÈÎÎñ¾ä±úÖ¸ÏòÈÎÎñ¿ØÖÆ¿é */
+	/* è®©ä»»åŠ¡å¥æŸ„æŒ‡å‘ä»»åŠ¡æ§åˆ¶å— */
     if( ( void * ) pxCreatedTask != NULL )
 	{		
 		*pxCreatedTask = ( TaskHandle_t ) pxNewTCB;
 	}
 }
 
-/* ³õÊ¼»¯ÈÎÎñÏà¹ØµÄÁĞ±í */
+/* åˆå§‹åŒ–ä»»åŠ¡ç›¸å…³çš„åˆ—è¡¨ */
 void prvInitialiseTaskLists( void )
 {
     UBaseType_t uxPriority;
@@ -147,19 +147,19 @@ extern TCB_t Task1TCB;
 extern TCB_t Task2TCB;
 void vTaskStartScheduler( void )
 {
-    /* ÊÖ¶¯Ö¸¶¨µÚÒ»¸öÔËĞĞµÄÈÎÎñ */
+    /* æ‰‹åŠ¨æŒ‡å®šç¬¬ä¸€ä¸ªè¿è¡Œçš„ä»»åŠ¡ */
     pxCurrentTCB = &Task1TCB;
     
-    /* Æô¶¯µ÷¶ÈÆ÷ */
+    /* å¯åŠ¨è°ƒåº¦å™¨ */
     if( xPortStartScheduler() != pdFALSE )
     {
-        /* µ÷¶ÈÆ÷Æô¶¯³É¹¦£¬Ôò²»»á·µ»Ø£¬¼´²»»áÀ´µ½ÕâÀï */
+        /* è°ƒåº¦å™¨å¯åŠ¨æˆåŠŸï¼Œåˆ™ä¸ä¼šè¿”å›ï¼Œå³ä¸ä¼šæ¥åˆ°è¿™é‡Œ */
     }
 }
 
 void vTaskSwitchContext( void )
 {    
-    /* Á½¸öÈÎÎñÂÖÁ÷ÇĞ»» */
+    /* ä¸¤ä¸ªä»»åŠ¡è½®æµåˆ‡æ¢ */
     if( pxCurrentTCB == &Task1TCB )
     {
         pxCurrentTCB = &Task2TCB;
